@@ -1,4 +1,6 @@
-rightDistance = brick.UltrasonicDist(4)
+disp("Rightwall Test");
+
+rightDistance = brick.UltrasonicDist(4);
 if rightDistance > 35
     rightWall = 'F';
 else 

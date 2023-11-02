@@ -1,22 +1,28 @@
+disp("START Mazeloop");
 
-RightwallTest
+RightwallTest;
 if rightWall == 'T'
     FrontwallTest
+    %%pause(1.4);
     if frontWall == 'T'
-        brick.MoveMotorAngleRel('B', 25, 350) ;
-        pause(4);
+        RotateLeft;
+        AdjustAngle;
+        %%pause(1.4);
     else
-        brick.MoveMotor('AB', 35);
-        pause(4.8);
-        brick.StopMotor('AB');
+        MoveForward;
+        AdjustAngle;
+        %%pause(5);
     end
 else
-    brick.MoveMotorAngleRel('B', 25, -350) ;
-    pause(4);
-    brick.MoveMotor('AB', 35);
-    pause(4.8);
-    brick.StopMotor('AB');
+    RotateRight;
+    AdjustAngle;
+    %%pause(1.4);
+    MoveForward;
+    %%pause(5);
 end
+
+pause(1);
+disp("END Mazeloop");
 
 %%  if (rightwall)
 %%      if (frontwall)
