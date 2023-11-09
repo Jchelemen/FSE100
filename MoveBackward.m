@@ -1,13 +1,13 @@
-%fprintf(" START Move Forward");
+%fprintf(" START Move Backward");
 
-    fprintf("  Forward");
+    fprintf("  Backward");
 
     brick.StopMotor('AB');
     brick.WaitForMotor('AB');
 
     fprintf(" Moving");
 
-    brick.MoveMotor('AB', -50);
+    brick.MoveMotor('AB', 50);
     pause(1);
     
     brick.StopMotor('AB');

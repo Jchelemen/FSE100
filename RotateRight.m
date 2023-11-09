@@ -1,11 +1,24 @@
-fprintf(" START Rotate Right");
-
-brick.MoveMotor('A', -20);
-brick.MoveMotor('B', 20);
-pause(1.39);
-brick.StopMotor('AB');
+%fprintf("  START Rotate Right");
 
 
-pause(1);
+    fprintf("  Right");
 
-disp(" END");
+    brick.StopMotor('AB');
+    brick.WaitForMotor('AB');
+
+    fprintf(" Moving");
+
+    brick.MoveMotor('A', -20);
+    brick.MoveMotor('B', 20);
+    pause(1.39);
+    
+    brick.StopMotor('AB');
+
+    fprintf(" Stopped");
+
+    contLeftTurns = 0;
+    pause(1);
+
+    AdjustAngle;
+
+    disp(" END");

@@ -1,41 +1,54 @@
-%%MATLAB INITIALIZATION 
-javaclasspath("C:\Program Files\MATLAB\R2023b\toolbox\EV3_Toolbox\EV3");
-brick = Brick('ioType','wifi','wfAddr','127.0.0.1','wfPort',5555,'wfSN','0016533dbaf5')
+%MATLAB INITIALIZATION -----------------------------
+javaclasspath("C:\Program Files\MATLAB\R2023b\toolbox\EV3_Toolbox-1\EV3");
+brick = Brick('ioType','wifi','wfAddr','127.0.0.1','wfPort',5555,'wfSN','0016533dbaf5');
 
-%%Instructions Set ------------------------------------
-%%brick.MoveMotor('AB', 100);     35 power 4.8sec is about 1 unit
-%%brick.StopMotor('AB');
-%%brick.UltrasonicDist(4)
-%%brick.MoveMotorAngleRel() nos, speed, angle, brake (360 is more like 90 lol), brake
-%%brick.MoveMotorAngleAbs() nos, speed, angle, brake
-%%brick.WaitForMotor() nos
-%%display(brick.GetBattLevel())
-%%pause(5);
+%%Input Settings ------------------------------------
+%{
+                A B C D                             1 2 3 4 X
+    Left Wheel  O X X X         Touch Sensor 1      X X X X O
+    Right Wheel X O X X         Touch Sensor 2      X O X X X
+    Lift        X X O X         Color Sensor        X X O X X
+                                Ultrasonic Sensor   X X X O X
+                                Gyro Sensor         O X X X X
+%}
 
-disp("Starting Sequence")
-
-%%Rotate Robot
-brick.MoveMotor('A', 25);
-brick.MoveMotor('B', -25);
-pause(1.96);
-brick.StopMotor('AB');
-disp("Finished Initialization");
-
-pause(1);
-
-%%Calibrate Gyroscope
+disp("*Starting Sequence");
 brick.GyroCalibrate(1);
+endTrack = 'F';    % Stops loop after crossing yellow then green
+mode = 'N';        % N = normal;   L = loop;    C = color;
+contLeftTurns = 0;
+cooldown = 0;
 
-endTrack = 'F';
+brick.SetColorMode(3, 2);
+firstYellow = 'F';
 
+
+%Testing grounds ----------------------------------
+%{
+disp("Testing...");
+RotateLeft;
+RotateLeft;
+pause(1);
+disp("End of testing****");
+%}
+
+pause(0.5);
 while endTrack == 'F'
-    %%level = brick.GetBattLevel();
-    %%disp(level)
-    Mazeloop;
+    switch mode
+        case 'N'
+            Normalloop;
+        case 'L'
+            Looploop;
+        case 'C'
+            Colorloop;
+    end
+    if cooldown > 0
+        cooldown = cooldown - 1;
+        fprintf("Cooldown: ");
+        disp(cooldown);
+    end
     pause(0.1);
 end
-
-
-
+disp("*The program has terminated");
 
 
