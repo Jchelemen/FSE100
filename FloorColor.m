@@ -1,6 +1,7 @@
 
 colorNumber = brick.ColorCode(3);
 color = 'X';
+previousMode = mode;
 switch colorNumber
     case 3
         color = 'G';
@@ -10,7 +11,7 @@ switch colorNumber
         mode = 'C';
     case 5
         color = 'R';
-        mode = 'C';
+        %mode = 'C';    %Should not colorloop, check during looploop
 end
 %{
 0	No color (Unknown color) 

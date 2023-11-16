@@ -16,6 +16,7 @@ disp("*Starting Sequence");
 brick.GyroCalibrate(1);
 endTrack = 'F';    % Stops loop after crossing yellow then green
 mode = 'N';        % N = normal;   L = loop;    C = color;
+previousMode = 'N';
 contLeftTurns = 0;
 cooldown = 0;
 
@@ -23,17 +24,37 @@ brick.SetColorMode(3, 2);
 firstYellow = 'F';
 
 
-%Testing grounds ----------------------------------
+%Experimental grounds ----------------------------------
 %{
 disp("Testing...");
-RotateLeft;
-RotateLeft;
-pause(1);
+brick.MoveMotor('C', 100);
+pause(4);
+brick.MoveMotor('C', -100);
+pause(4);
 disp("End of testing****");
 %}
 
+%Initial Testing
+rightWall = brick.UltrasonicDist(4);
+if (rightWall > 40)
+    disp("Starting Right");
+    RotateRight;
+end
+
+%Runtime Loops
 pause(0.5);
 while endTrack == 'F'
+    if contLeftTurns >= 8
+        contLeftTurns = 0;
+        brick.MoveMotor('AB', -50);
+        pause(7.5);
+        brick.StopMotor('AB');
+        pause(0.3);
+        RotateRight;
+        RotateRight;
+        mode = 'L';
+        pause(0.5);
+    end
     switch mode
         case 'N'
             Normalloop;
@@ -47,7 +68,7 @@ while endTrack == 'F'
         fprintf("Cooldown: ");
         disp(cooldown);
     end
-    pause(0.1);
+    pause(0.05);
 end
 disp("*The program has terminated");
 

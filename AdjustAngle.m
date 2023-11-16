@@ -35,6 +35,6 @@ if ((angle<-50) && (angle>-89))
 end
 
 angle = brick.GyroAngle(1);
-disp(angle);
+%disp(angle);
 
 brick.GyroCalibrate(1);

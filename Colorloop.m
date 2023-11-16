@@ -1,39 +1,46 @@
 %disp("Color detected");
+cooldown = 0;
 switch color
     case 'G'
         disp("Green detected");
         if firstYellow == 'T'
             brick.StopMotor('AB');
             pause(0.5);
-            brick.MoveMotor('AB', -20);
-            pause(1);
+            brick.MoveMotor('AB', -40);
+            pause(2);
             brick.StopMotor('AB');
             disp("Robot has reached the destination");
             endTrack = 'T';
+        %else
+        %    mode = 'N';
         end
     case 'Y'
         disp("Yellow detected");
         firstYellow = 'T';
         brick.StopMotor('AB');
         pause(0.5);
+        RotateRight;                    %rotate 180 degrees
         RotateRight;
-        RotateRight;
-        brick.MoveMotor('AB', 20);
-        pause(2.1);
+        brick.MoveMotor('AB', 20);      %back up
+        pause(2.3);
         brick.StopMotor('AB');
-        %raise and lower lift
+        brick.MoveMotor('C', 100);      %raise and lower lift
+        pause(3.8);
+        brick.MoveMotor('C',-100);
+        pause(3.8);
+        brick.StopMotor('C');
         pause(0.5);
-        brick.MoveMotor('AB', -50);
+        brick.MoveMotor('AB', -50);     %move forward to get out of zone
         pause(1.4);
         brick.StopMotor('AB');
         pause(0.3);
-        mode = 'N';
+        %mode = 'N';
     case 'R'
-        disp("Red detected");
-        pause(0.1);
-        mode = 'N';
+        disp("Red detected - likely error");
+        pause(0.5);
+        %mode = 'N';
 end
-
+mode = previousMode;
 disp("END COLORLOOP");
 
 %pause(5);
