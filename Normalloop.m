@@ -8,14 +8,14 @@ if (rightWall > 40) && (cooldown == 0)
     RotateRight;
     %MoveForwardFull;
     pause(0.2);
-    cooldown = 11;
+    cooldown = 18;
     disp("Stop Right Wall");
 elseif frontWall == 1
     disp("Front Wall Contact");
     %pause(0.05);
     brick.StopMotor('AB', 'Brake');
     pause(0.2);
-    brick.MoveMotor('AB', 5);
+    brick.MoveMotor('AB', 15);
     pause(0.2);
     brick.StopMotor('AB', 'Brake');
     pause(0.2);

@@ -11,8 +11,13 @@ switch color
             brick.StopMotor('AB');
             disp("Robot has reached the destination");
             endTrack = 'T';
-        %else
-        %    mode = 'N';
+        else
+            brick.StopMotor('AB');
+            pause(0.2);
+            MoveBackward;
+            RotateLeft;
+            cooldown = 17;
+            %mode = 'N';
         end
     case 'Y'
         disp("Yellow detected");
@@ -31,7 +36,7 @@ switch color
         brick.StopMotor('C');
         pause(0.5);
         brick.MoveMotor('AB', -50);     %move forward to get out of zone
-        pause(1.4);
+        pause(1.3);
         brick.StopMotor('AB');
         pause(0.3);
         %mode = 'N';

@@ -5,11 +5,15 @@ difference = oldRightWall - rightWall;
 
 %fprintf("difference ");
 %disp(difference);
-
-if difference > 0.01
+if difference > 0.1
+    brick.MoveMotor('B', -52);
+elseif difference > 0.01
     brick.MoveMotor('B', -51);
 end
-if difference < -0.01
+
+if difference < -0.1
+    brick.MoveMotor('A', -52);
+elseif difference < -0.01
     brick.MoveMotor('A', -51);
 end
 

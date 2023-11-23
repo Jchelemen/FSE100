@@ -8,7 +8,7 @@ if color == 'R'
     MoveBackward;
     RotateLeft;
     contLeftTurns = contLeftTurns - 1;
-    cooldown = 12;
+    cooldown = 17;
     color = 'X';
 else
     if (rightWall > 40) && (cooldown == 0)
@@ -17,7 +17,7 @@ else
         RotateRight;
         %MoveForwardFull;
         pause(0.2);
-        cooldown = 11;
+        cooldown = 18;
         disp("Stop Right Wall");
     elseif frontWall == 1
         disp("Front Wall Contact");

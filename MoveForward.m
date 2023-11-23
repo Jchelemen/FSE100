@@ -8,7 +8,7 @@
     fprintf(" Moving");
 
     brick.MoveMotor('AB', -50);
-    pause(1);
+    pause(1.1);
     
     brick.StopMotor('AB');
 
