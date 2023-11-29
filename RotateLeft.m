@@ -21,4 +21,4 @@
 
     AdjustAngle;
 
-    disp(" END");
+    fprintf(" END \n");

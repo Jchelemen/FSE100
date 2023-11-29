@@ -9,14 +9,14 @@ switch color
             brick.MoveMotor('AB', -40);
             pause(2);
             brick.StopMotor('AB');
-            disp("Robot has reached the destination");
+            %disp("Robot has reached the destination");
             endTrack = 'T';
         else
             brick.StopMotor('AB');
             pause(0.2);
             MoveBackward;
             RotateLeft;
-            cooldown = 17;
+            cooldown = 12;
             %mode = 'N';
         end
     case 'Y'
@@ -27,7 +27,7 @@ switch color
         RotateRight;                    %rotate 180 degrees
         RotateRight;
         brick.MoveMotor('AB', 20);      %back up
-        pause(2.3);
+        pause(2.1);
         brick.StopMotor('AB');
         brick.MoveMotor('C', 100);      %raise and lower lift
         pause(3.8);
@@ -46,6 +46,6 @@ switch color
         %mode = 'N';
 end
 mode = previousMode;
-disp("END COLORLOOP");
+disp("--END COLORLOOP--");
 
 %pause(5);

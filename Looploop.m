@@ -8,19 +8,19 @@ if color == 'R'
     MoveBackward;
     RotateLeft;
     contLeftTurns = contLeftTurns - 1;
-    cooldown = 17;
+    cooldown = 12;
     color = 'X';
 else
     if (rightWall > 40) && (cooldown == 0)
-        disp("No Right Wall");
+        disp("  No Right Wall");
         MoveForward;
         RotateRight;
         %MoveForwardFull;
         pause(0.2);
-        cooldown = 18;
-        disp("Stop Right Wall");
+        cooldown = 12;
+        disp("  Stop Right Wall");
     elseif frontWall == 1
-        disp("Front Wall Contact");
+        disp("  Front Wall Contact");
         %pause(0.05);
         brick.StopMotor('AB');
         pause(1);
@@ -28,7 +28,7 @@ else
         %pause(0.3);
         RotateLeft;
         %pause(0.2);
-        disp("Front Wall End");
+        disp("  Front Wall End");
     else
         brick.MoveMotor('AB', -50);
         SlantAdjust;

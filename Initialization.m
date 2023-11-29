@@ -1,5 +1,5 @@
 %MATLAB INITIALIZATION -----------------------------
-javaclasspath("C:\Program Files\MATLAB\R2023b\toolbox\EV3_Toolbox-1\EV3");
+javaclasspath("C:\Program Files\MATLAB\R2023b\toolbox\EV3_Toolbox\EV3");
 pause(0.2);
 brick = Brick('ioType','wifi','wfAddr','127.0.0.1','wfPort',5555,'wfSN','0016533dbaf5');
 
@@ -16,7 +16,7 @@ pause(0.5);
 %}
 
 %Startup Features
-disp("*STARTING SEQUENCE");
+disp("--STARTING SEQUENCE--");
 brick.GyroCalibrate(1);
 endTrack = 'F';             % Stops loop after crossing yellow then green
 mode = 'N';                 % N = normal;   L = loop;    C = color;
@@ -62,8 +62,9 @@ disp("End of testing****");
 
 %Runtime Loops
 pause(0.5);
+cycle = 1;
 while endTrack == 'F'
-%{
+%
     if contLeftTurns >= 8
         contLeftTurns = 0;
         brick.MoveMotor('AB', -50);
@@ -75,7 +76,7 @@ while endTrack == 'F'
         mode = 'L';
         pause(0.5);
     end
-%}
+%
     if mode == 'N'
         Normalloop;
     elseif mode == 'L'
@@ -95,11 +96,12 @@ while endTrack == 'F'
 %}
     if cooldown > 0
         cooldown = cooldown - 1;
-        fprintf("Cooldown: ");
-        disp(cooldown);
+        fprintf("Cooldown: %d  ", cooldown);
     end
-    %pause(0.04);
+    pause(0.05);
+    fprintf("Cycle %d: ", cycle);
+    cycle = cycle + 1;
 end
-disp("*The program has terminated");
+fprintf("\n--The program has terminated--\n");
 
 
